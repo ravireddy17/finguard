@@ -11,7 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/compose/)
 [![WebSocket](https://img.shields.io/badge/WebSocket-Live_Feed-FF6B6B?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
-**A production-grade, full-stack fraud detection system with a cinematic dark-terminal UI, ML-powered risk scoring, and sub-5ms inference latency — built end-to-end with Java Spring Boot and Next.js.**
+**A production-grade, full-stack fraud detection system with a cinematic dark-terminal UI, ML-powered risk scoring, and sub-5ms inference latency - built end-to-end with Java Spring Boot and Next.js.**
 
 [Live Demo](#) · [Architecture](#architecture) · [Getting Started](#getting-started) · [API Reference](#api-reference)
 
@@ -43,7 +43,7 @@ The core of FinGuard is a custom in-memory ML inference engine (`FraudScoringEng
 Additional weighted features: high-risk merchant categories, high-risk country codes, off-hours detection, cross-border high-value transactions.
 
 ### 🔌 Real-Time WebSocket Feed
-Spring's `WebSocketHandler` broadcasts a newly scored transaction every 1.5 seconds to all connected dashboard clients — no polling, zero latency overhead.
+Spring's `WebSocketHandler` broadcasts a newly scored transaction every 1.5 seconds to all connected dashboard clients - no polling, zero latency overhead.
 
 ---
 
@@ -97,7 +97,7 @@ Spring's `WebSocketHandler` broadcasts a newly scored transaction every 1.5 seco
 - Maven 3.9+
 - Docker + Docker Compose (optional)
 
-### Option A — Docker (Recommended, one command)
+### Option A : Docker (Recommended, one command)
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/finguard.git
@@ -107,7 +107,7 @@ docker-compose up --build
 
 Then open **http://localhost:3000** 🎉
 
-### Option B — Run Locally
+### Option B : Run Locally
 
 **Backend:**
 ```bash
@@ -124,7 +124,7 @@ npm run dev
 # Dashboard at http://localhost:3000
 ```
 
-> **Note:** The frontend works fully standalone without the backend — it falls back to a realistic mock data generator automatically. This makes it easy to showcase on GitHub Pages or Vercel.
+> **Note:** The frontend works fully standalone without the backend, it falls back to a realistic mock data generator automatically. This makes it easy to showcase on GitHub Pages or Vercel.
 
 ---
 
@@ -139,7 +139,7 @@ npm run dev
 | `GET` | `/actuator/health` | Backend health check |
 | `WS` | `ws://localhost:8080/ws/transactions` | Live transaction stream |
 
-### POST `/api/transactions/score` — Example
+### POST `/api/transactions/score` - Example
 
 ```json
 // Request
@@ -242,13 +242,13 @@ finguard/
 ## 💡 Key Engineering Decisions
 
 **Why in-memory ML instead of an external model?**
-For a dashboard that needs sub-5ms scoring at high throughput, calling an external Python ML service would add 20–100ms of network latency per transaction. The scoring engine is deliberately co-located with the transaction service for zero-latency inference — a pattern used in real-time fraud systems at scale (Stripe, PayPal).
+For a dashboard that needs sub-5ms scoring at high throughput, calling an external Python ML service would add 20–100ms of network latency per transaction. The scoring engine is deliberately co-located with the transaction service for zero-latency inference, a pattern used in real-time fraud systems at scale (Stripe, PayPal).
 
 **Why WebSocket over polling?**
 Polling at 1-second intervals would generate ~86,400 HTTP requests per client per day. WebSocket maintains a single persistent connection, reducing server load by ~99% while delivering genuinely real-time updates.
 
 **Why CopyOnWriteArrayList for velocity tracking?**
-The velocity window is read-heavy (every transaction reads it) with infrequent writes. `CopyOnWriteArrayList` gives lock-free reads at the cost of write copies — the right trade-off for this access pattern in a concurrent environment.
+The velocity window is read-heavy (every transaction reads it) with infrequent writes. `CopyOnWriteArrayList` gives lock-free reads at the cost of write copies the right trade-off for this access pattern in a concurrent environment.
 
 ---
 
