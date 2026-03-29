@@ -22,13 +22,13 @@
 ## ✨ Features
 
 ### 🎨 Frontend
-- **Cinematic terminal UI** — custom typography (Bebas Neue + Share Tech Mono), glow effects, and animated micro-interactions throughout
-- **Live transaction ticker** — streaming feed in the header, auto-scrolling
-- **Animated SVG fraud gauge** — smooth needle animation tracking the system's composite risk index in real time
-- **Geo risk heatmap** — country-level fraud intensity grid updated as transactions arrive
-- **WebSocket-powered feed** — zero-polling, push-based live data from the backend
-- **Transaction detail modal** — full forensic breakdown with Block / Approve actions
-- **Graceful degradation** — runs standalone with realistic mock data if backend is offline
+- **Cinematic terminal UI** - custom typography (Bebas Neue + Share Tech Mono), glow effects, and animated micro-interactions throughout
+- **Live transaction ticker** - streaming feed in the header, auto-scrolling
+- **Animated SVG fraud gauge** - smooth needle animation tracking the system's composite risk index in real time
+- **Geo risk heatmap** - country-level fraud intensity grid updated as transactions arrive
+- **WebSocket-powered feed** - zero-polling, push-based live data from the backend
+- **Transaction detail modal** - full forensic breakdown with Block / Approve actions
+- **Graceful degradation** - runs standalone with realistic mock data if backend is offline
 
 ### ⚙️ Backend — Special Feature: Multi-Factor Fraud Scoring Engine
 The core of FinGuard is a custom in-memory ML inference engine (`FraudScoringEngine.java`) that scores every transaction across **4 detection mechanisms**, all completing in under **5ms**:
