@@ -30,7 +30,7 @@
 - **Transaction detail modal** - full forensic breakdown with Block / Approve actions
 - **Graceful degradation** - runs standalone with realistic mock data if backend is offline
 
-### ⚙️ Backend — Special Feature: Multi-Factor Fraud Scoring Engine
+### ⚙️ Backend Special Feature: Multi-Factor Fraud Scoring Engine
 The core of FinGuard is a custom in-memory ML inference engine (`FraudScoringEngine.java`) that scores every transaction across **4 detection mechanisms**, all completing in under **5ms**:
 
 | Mechanism | Description |
@@ -242,7 +242,7 @@ finguard/
 ## 💡 Key Engineering Decisions
 
 **Why in-memory ML instead of an external model?**
-For a dashboard that needs sub-5ms scoring at high throughput, calling an external Python ML service would add 20–100ms of network latency per transaction. The scoring engine is deliberately co-located with the transaction service for zero-latency inference, a pattern used in real-time fraud systems at scale (Stripe, PayPal).
+For a dashboard that needs sub-5ms scoring at high throughput, calling an external Python ML service would add 20-100ms of network latency per transaction. The scoring engine is deliberately co-located with the transaction service for zero-latency inference, a pattern used in real-time fraud systems at scale (Stripe, PayPal).
 
 **Why WebSocket over polling?**
 Polling at 1-second intervals would generate ~86,400 HTTP requests per client per day. WebSocket maintains a single persistent connection, reducing server load by ~99% while delivering genuinely real-time updates.
