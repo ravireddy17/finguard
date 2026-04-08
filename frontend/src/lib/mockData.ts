@@ -35,7 +35,7 @@ export function generateMockTransaction(): Transaction {
   const velocityCount = Math.floor(Math.random() * 12);
   const isVpn = Math.random() < 0.15;
   const isNight = new Date().getHours() < 6 || new Date().getHours() > 22;
-
+  
   let baseScore = 10;
   const factors: string[] = [];
 
@@ -47,14 +47,14 @@ export function generateMockTransaction(): Transaction {
   if (isNight) { baseScore += 8; factors.push('Unusual hours'); }
   if (Math.random() < 0.1) { baseScore += 10; factors.push('New device fingerprint'); }
   if (Math.random() < 0.05) { baseScore += 15; factors.push('Blacklisted IP range'); }
-
+  
   baseScore = Math.min(99, baseScore + Math.floor(Math.random() * 10));
 
   const [lat, lng] = geoCoords[country] || [0, 0];
   const coord_jitter = () => (Math.random() - 0.5) * 8;
 
   const status = baseScore > 85 ? 'blocked' : baseScore > 70 ? 'flagged' : 'approved';
-
+  
   return {
     id: `TXN-${++counter}`,
     amount: parseFloat(amount.toFixed(2)),
